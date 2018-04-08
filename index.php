@@ -28,6 +28,17 @@ $container['db'] = function ()
   return new PDO('mysql:host=localhost;dbname=tutorial','root','');
 };
 
+//Container untuk not found handler
+$container['notFoundHandler'] = function($container){
+    return function ($request, $response) use ($container)
+    {
+      return $container['response']
+      ->withStatus(404)
+      ->withHeader('Content-Type','text/html')
+      ->write('halaman tidak ditemukan');
+    };
+};
+
 $app->get('/', function ($request, $response)
 {
   return $this->view->render($response, 'home.twig ');
