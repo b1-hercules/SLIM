@@ -27,6 +27,15 @@ $app->get('/', function ($request, $response)
   // $this->hello;
 });
 
+$app->get('/forum[/{title}]', function ($request, $response, $args)
+{
+
+  return $this->view->render($response, 'forum.twig',[
+      'title' => $args['title']
+  ]);
+  // $this->hello;
+})->setName('single');
+
 //{
 //
 //   $data = array(

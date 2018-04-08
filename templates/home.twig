@@ -1,7 +1,8 @@
 {% extends "layout/base.html" %}
 
-{% block title %}SLIM Beginner{% endblock %}
+{% block title %}Home SLIM Beginner{% endblock %}
 
 {% block content %}
 <h2> Ini halaman HOME </h2>
+<a href="{{ path_for('single', { 'title': 'halo' }) }}"> Ke Forum </a>
 {% endblock %}
