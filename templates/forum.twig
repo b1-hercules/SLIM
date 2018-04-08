@@ -3,5 +3,11 @@
 {% block title %}forum SLIM Beginner{% endblock %}
 
 {% block content %}
-<h2> Ini halaman Forum {{title}} </h2>
+
+  {% for data in forum %}
+    * {{ data.title }}
+    {% else %}
+      Ngga Ada data
+  {% endfor %}
+
 {% endblock %}

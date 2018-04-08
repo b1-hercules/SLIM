@@ -39,9 +39,10 @@ $app->get('/forum', function ($request, $response, $args)
 
 $datas = $this->db->query("SELECT * FROM forum")->fetchAll(PDO::FETCH_OBJ);
 
-  die(var_dump($datas));
-  return $this->view->render($response, 'forum.twig',[
+
+  return $this->view->render($response, 'forum.twig', [
       // 'title' => $args['title']
+      'forum'=>$datas
   ]);
   // $this->hello;
 })->setName('single');
