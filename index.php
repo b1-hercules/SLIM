@@ -71,7 +71,7 @@ $app->get('/', function ($request, $response)
 $app->get('/forum', function ($request, $response, $args)
 {
 
-  var_dump($this->db->table('forum')->get());
+  var_dump($this->db->table('forum')->where('title','hey ho')->get());
   die();
 
   return $this->view->render($response, 'forum.twig', [
