@@ -5,8 +5,16 @@ require __DIR__ . '/vendor/autoload.php';
 $app = new Slim\App;
 $app->get('/', function ($request, $response)
 {
-  die(var_dump($request->getHeaders()));
-  return $request->getHeaders();
+
+  $data = array(
+          'nama' => 'iqbal',
+          'age' => 20
+
+  );
+
+
+
+  return $response->withJson($data);
 });
 
 // $app->get('/forum[/{title}]', function ($request, $response, $args)
