@@ -11,6 +11,7 @@ $container = $app->getContainer();
 //   echo "Bung!!!";
 // };
 // Register component on container
+//container untuk View
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig( __DIR__ . '/templates', [ 'cache' => false ]);
 
@@ -21,17 +22,26 @@ $container['view'] = function ($container) {
     return $view;
 };
 
+//container untuk database
+$container['db'] = function ()
+{
+  return new PDO('mysql:host=localhost;dbname=tutorial','root','');
+};
+
 $app->get('/', function ($request, $response)
 {
   return $this->view->render($response, 'home.twig ');
   // $this->hello;
 });
 
-$app->get('/forum[/{title}]', function ($request, $response, $args)
+$app->get('/forum', function ($request, $response, $args)
 {
 
+$datas = $this->db->query("SELECT * FROM forum")->fetchAll(PDO::FETCH_OBJ);
+
+  die(var_dump($datas));
   return $this->view->render($response, 'forum.twig',[
-      'title' => $args['title']
+      // 'title' => $args['title']
   ]);
   // $this->hello;
 })->setName('single');
