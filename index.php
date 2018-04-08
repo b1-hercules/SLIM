@@ -5,8 +5,8 @@ require __DIR__ . '/vendor/autoload.php';
 $app = new Slim\App;
 $app->get('/', function ($request, $response)
 {
-  die(var_dump($request));
-  return $request->getMethod();
+  die(var_dump($request->getHeaders()));
+  return $request->getHeaders();
 });
 
 // $app->get('/forum[/{title}]', function ($request, $response, $args)
