@@ -32,10 +32,10 @@ $container['db'] = function ()
 $container['notFoundHandler'] = function($container){
     return function ($request, $response) use ($container)
     {
-      return $container['response']
-      ->withStatus(404)
-      ->withHeader('Content-Type','text/html')
-      ->write('halaman tidak ditemukan');
+      return $container->view->render($response, '404.twig ');
+      // ->withStatus(404)
+      // ->withHeader('Content-Type','text/html')
+      // ->write('halaman tidak ditemukan');
     };
 };
 
