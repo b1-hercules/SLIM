@@ -2,7 +2,12 @@
 
 
 require __DIR__ . '/vendor/autoload.php';
-$app = new Slim\App;
+$app = new Slim\App([
+      'settings'=> [
+        'displayErrorDetails'=> true
+      ]
+
+]);
 
 $container = $app->getContainer();
 
@@ -25,7 +30,7 @@ $container['view'] = function ($container) {
 
 $app->get('/', function ($request, $response)
 {
-  return $this->view->render($response, 'home.twig ');
+  return $this->view->render($response, 'hsome.twig ');
   // $this->hello;
 });
 
