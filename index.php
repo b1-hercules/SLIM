@@ -14,7 +14,7 @@ $app->get('/', function ($request, $response)
 
 
 
-  return $response->withJson($data);
+  return $response->withJson($data, 404);
 });
 
 // $app->get('/forum[/{title}]', function ($request, $response, $args)
