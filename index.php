@@ -3,19 +3,32 @@
 
 require __DIR__ . '/vendor/autoload.php';
 $app = new Slim\App;
+
+$container = $app->getContainer();
+
+$container['hello'] = function()
+{
+  echo "Bung!!!";
+};
+
+
 $app->get('/', function ($request, $response)
 {
-
-  $data = array(
-          'nama' => 'iqbal',
-          'age' => 20
-
-  );
-
-
-
-  return $response->withJson($data, 404);
+  $this->hello;
 });
+
+//{
+//
+//   $data = array(
+//           'nama' => 'iqbal',
+//           'age' => 20
+//
+//   );
+//
+//
+//
+//   return $response->withJson($data, 404);
+// });
 
 // $app->get('/forum[/{title}]', function ($request, $response, $args)
 // {
