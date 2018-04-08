@@ -2,7 +2,21 @@
 
 
 require __DIR__ . '/vendor/autoload.php';
-$app = new Slim\App(['settings'=> ['displayErrorDetails'=> true]]);
+$app = new Slim\App([
+    'settings'=> [
+      'displayErrorDetails'=> true,
+      'db'=> [
+        'driver'      =>'mysql',
+        'host'        =>'localhost',
+        'database'    =>'tutorial',
+        'username'    =>'root',
+        'password'    =>'',
+        'charset'     =>'utf8',
+        'collation'   =>'utf8_unicode_ci',
+        'prefix'      =>'',
+        ]
+      ]
+    ]);
 
 $container = $app->getContainer();
 
@@ -22,10 +36,19 @@ $container['view'] = function ($container) {
     return $view;
 };
 
-//container untuk database
-$container['db'] = function ()
-{
-  return new PDO('mysql:host=localhost;dbname=tutorial','root','');
+// //container untuk database
+// $container['db'] = function ()
+// {
+//   return new PDO('mysql:host=localhost;dbname=tutorial','root','');
+// };
+
+//container untuk eloquent
+$container['db'] = function ($container){
+    $capsule = new \Illuminate\Database\Capsule\Manager;
+    $capsule->addConnection($container['settings']['db']);
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+    return $capsule;
 };
 
 //Container untuk not found handler
@@ -48,8 +71,8 @@ $app->get('/', function ($request, $response)
 $app->get('/forum', function ($request, $response, $args)
 {
 
-$datas = $this->db->query("SELECT * FROM forum")->fetchAll(PDO::FETCH_OBJ);
-
+  var_dump($this->db->table('forum')->get());
+  die();
 
   return $this->view->render($response, 'forum.twig', [
       // 'title' => $args['title']
