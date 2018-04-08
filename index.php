@@ -2,12 +2,7 @@
 
 
 require __DIR__ . '/vendor/autoload.php';
-$app = new Slim\App([
-      'settings'=> [
-        'displayErrorDetails'=> true
-      ]
-
-]);
+$app = new Slim\App(['settings'=> ['displayErrorDetails'=> true]]);
 
 $container = $app->getContainer();
 
@@ -17,9 +12,7 @@ $container = $app->getContainer();
 // };
 // Register component on container
 $container['view'] = function ($container) {
-    $view = new \Slim\Views\Twig( __DIR__ . '/templates', [
-        'cache' => false
-    ]);
+    $view = new \Slim\Views\Twig( __DIR__ . '/templates', [ 'cache' => false ]);
 
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
@@ -30,7 +23,7 @@ $container['view'] = function ($container) {
 
 $app->get('/', function ($request, $response)
 {
-  return $this->view->render($response, 'hsome.twig ');
+  return $this->view->render($response, 'home.twig ');
   // $this->hello;
 });
 
